@@ -1,0 +1,35 @@
+def validate(l):
+    return sorted(l) == [1,2,3,4,5,6,7,8,9]
+matrix = []
+correct = True
+for i in range(3):
+    
+    l1 = list(map(int, list(input("Enter row: "))))
+    l2 = list(map(int, list(input("Enter row: "))))
+    l3 = list(map(int, list(input("Enter row: "))))
+    correct &= validate(l1)
+    correct &= validate(l2)
+    correct &= validate(l3)
+    if not correct:
+        break
+    matrix.append(l1)
+    matrix.append(l2)
+    matrix.append(l3)
+    l1 = matrix[3 * i + 0][:3] + matrix[3 * i + 1][:3] + matrix[3 * i + 2][:3]
+    l2 = matrix[3 * i + 0][3:6] + matrix[3 * i + 1][3:6] + matrix[3 * i + 2][3:6]
+    l3 = matrix[3 * i + 0][6:] + matrix[3 * i + 1][6:] + matrix[3 * i + 2][6:]
+    correct &= validate(l1)
+    correct &= validate(l2)
+    correct &= validate(l3)
+    if not correct:
+        break
+if correct:
+    for i in range(9):
+        l = [matrix[j][i] for j in range(9)]
+        correct &= validate(l)
+    if correct == True:
+        print("Yes")
+    else:
+        print("No")
+else:
+    print("No")
